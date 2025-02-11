@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class BookModel(models.Model):
     GENRE_CHOICES = (
         ('HORROR', 'Ужасы'),
@@ -42,4 +43,19 @@ class BookModel(models.Model):
         verbose_name_plural = 'Книги'
 
 
+class Review(models.Model):
+    STARS = (
+        ("🌟", "🌟"),
+        ("🌟🌟", "🌟🌟"),
+        ("🌟🌟🌟", "🌟🌟🌟"),
+        ("🌟🌟🌟🌟", "🌟🌟🌟🌟"),
+        ("🌟🌟🌟🌟🌟", "🌟🌟🌟🌟🌟"),
+    )
+    choice_show = models.ForeignKey(BookModel, on_delete=models.CASCADE,
+                                    related_name='books')
+    created_at = models.DateField(auto_now_add=True)
+    review_text = models.TextField(default='крутая книга')
+    stars = models.CharField(max_length=10, choices=STARS, default='🌟🌟')
 
+    def __str__(self):
+        return f'{self.stars}-{self.choice_show.title}'

@@ -1,0 +1,32 @@
+{% include 'components/header.html' %}
+<!-- Контент с информацией о книге -->
+<div class="container mt-4">
+    <div class="book-card">
+        <div class="card">
+            <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Книга">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-text">{{ book.description }}</p>
+                <p><strong>Цена:</strong> ${{ book.price }}</p>
+                <p><strong>Дата выхода:</strong> {{ book.release_date }}</p>
+                <p><strong>Жанр:</strong> {{ book.genre }}</p>
+                <p><strong>Почта:</strong> {{ book.author_email }}</p>
+                <p><strong>Автор:</strong> {{ book.author }}</p>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/{{ book.video_id }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок для комментариев -->
+    <div class="comment-section">
+        <h5>Комментарии</h5>
+        {% for comment in comments %}
+        <div class="comment">
+            <p>({{ comment.date }}): {{ comment.text }} <strong>Оценка:</strong> {{ comment.rating }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Футер -->
+{% include 'components/footer.html' %}

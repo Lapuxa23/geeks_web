@@ -1,0 +1,22 @@
+{% include 'components/header.html' %}
+<!-- Контент с карточками -->
+<div class="container mt-4 content">
+    <div class="row justify-content-center">
+        <!-- Пример карточки книги -->
+        {% for book in books %}
+        <div class="col-md-4 mb-4">
+            <div class="card" style="width: 100%;">
+                <img src="{{ book.image.url }}" class="card-img-top" alt="Обложка книги">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">Дата выхода: {{ book.release_date }}</p>
+                    <a href="{{ book.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Футер -->
+{% include 'components/footer.html' %}
