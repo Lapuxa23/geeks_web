@@ -51,11 +51,11 @@ class Review(models.Model):
         ("🌟🌟🌟🌟", "🌟🌟🌟🌟"),
         ("🌟🌟🌟🌟🌟", "🌟🌟🌟🌟🌟"),
     )
-    choice_show = models.ForeignKey(BookModel, on_delete=models.CASCADE,
+    choice_books = models.ForeignKey(BookModel, on_delete=models.CASCADE,
                                     related_name='books')
     created_at = models.DateField(auto_now_add=True)
     review_text = models.TextField(default='крутая книга')
     stars = models.CharField(max_length=10, choices=STARS, default='🌟🌟')
 
     def __str__(self):
-        return f'{self.stars}-{self.choice_show.title}'
+        return f'{self.stars}-{self.choice_books.title}'
