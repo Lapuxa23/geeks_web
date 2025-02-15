@@ -3,75 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% if template == 'book_list' %}
-            Список книг
-        {% elif template == 'cart' %}
-            Корзина
-        {% elif template == 'checkout_success' %}
-            Заказ оформлен
-        {% else %}
-            Книжный магазин
-        {% endif %}
-    </title>
+    <title>Список книг</title>
 </head>
 <body>
-    <header>
-        <h1>Добро пожаловать в книжный магазин!</h1>
-        <nav>
-            <a href="{% url 'book_list' %}">Список книг</a> |
-            <a href="{% url 'cart' %}">Корзина</a>
-        </nav>
-    </header>
-
-    <main>
-        {% if template == 'book_list' %}
-            <h1>Список книг</h1>
-            <ul>
-                {% for book in books %}
-                    <li>
-                        <h2>{{ book.title }}</h2>
-                        <p>Автор: {{ book.author }}</p>
-                        <p>Цена: {{ book.price }} руб.</p>
-                        <a href="{% url 'add_to_cart' book.id %}">Добавить в корзину</a>
-                    </li>
-                {% endfor %}
-            </ul>
-            <a href="{% url 'cart' %}">Перейти в корзину</a>
-
-        {% elif template == 'cart' %}
-            <h1>Ваша корзина</h1>
-            {% if order %}
-                <ul>
-                    {% for item in order.items.all %}
-                        <li>
-                            <h2>{{ item.book.title }}</h2>
-                            <p>Количество: {{ item.quantity }}</p>
-                            <p>Цена за единицу: {{ item.price }} руб.</p>
-                            <p>Общая стоимость: {{ item.quantity|add:item.price }} руб.</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <p><strong>Итого: {{ order.total_price }} руб.</strong></p>
-                <a href="{% url 'checkout' %}">Оформить заказ</a>
-            {% else %}
-                <p>Ваша корзина пуста.</p>
-            {% endif %}
-            <a href="{% url 'book_list' %}">Вернуться к списку книг</a>
-
-        {% elif template == 'checkout_success' %}
-            <h1>Заказ успешно оформлен!</h1>
-            <p>Спасибо за ваш заказ. Мы свяжемся с вами в ближайшее время.</p>
-            <a href="{% url 'book_list' %}">Вернуться к списку книг</a>
-
-        {% else %}
-            <h1>Главная страница</h1>
-            <p>Добро пожаловать в книжный магазин!</p>
-        {% endif %}
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Книжный магазин</p>
-    </footer>
+    <h1>Список книг</h1>
+    <ul>
+        {% for book in books %}
+            <li>
+                <h2>{{ book.title }}</h2>
+                <p>Автор: {{ book.author }}</p>
+                <p>Цена: {{ book.price }} руб.</p>
+                <a href="{% url 'add_to_cart' book.id %}">Добавить в корзину</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cart' %}">Перейти в корзину</a>
 </body>
 </html>
