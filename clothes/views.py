@@ -1,43 +1,37 @@
+from django.views.generic import ListView
 from django.shortcuts import render
-from . import models
+from .models import Product
 
 
-def all_clothes(request):
-    if request.method == "GET":
-        query = models.Product.objects.all().order_by('-id')
-        context_object_name = {
-            'all_clothes': query
-        }
-        return render(request, 'clothes_a/all_clothes.html',
-                      context=context_object_name)
+class AllClothesView(ListView):
+    model = Product
+    template_name = 'clothes_a/all_clothes.html'
+    context_object_name = 'all_clothes'
+    ordering = ['-id']
 
 
-def children_clothes(request):
-    if request.method == "GET":
-        query = models.Product.objects.filter(tags__name='для детей').order_by('-id')
-        context_object_name = {
-            'children_clothes': query
-        }
-        return render(request, 'clothes_a/children_clothes.html',
-                      context=context_object_name)
+class ChildrenClothesView(ListView):
+    model = Product
+    template_name = 'clothes_a/children_clothes.html'
+    context_object_name = 'children_clothes'
+
+    def get_queryset(self):
+        return Product.objects.filter(tags__name='для детей').order_by('-id')
 
 
-def teenager_clothes(request):
-    if request.method == "GET":
-        query = models.Product.objects.filter(tags__name='для подростков').order_by('-id')
-        context_object_name = {
-            'teenager_clothes': query
-        }
-        return render(request, 'clothes_a/teenager_clothes.html',
-                      context=context_object_name)
+class TeenagerClothesView(ListView):
+    model = Product
+    template_name = 'clothes_a/teenager_clothes.html'
+    context_object_name = 'teenager_clothes'
+
+    def get_queryset(self):
+        return Product.objects.filter(tags__name='для подростков').order_by('-id')
 
 
-def adult_clothes(request):
-    if request.method == "GET":
-        query = models.Product.objects.filter(tags__name='для взрослых').order_by('-id')
-        context_object_name = {
-            'adult_clothes': query
-        }
-        return render(request, 'clothes_a/adult_clothes.html',
-                      context=context_object_name)
+class AdultClothesView(ListView):
+    model = Product
+    template_name = 'clothes_a/adult_clothes.html'
+    context_object_name = 'adult_clothes'
 
+    def get_queryset(self):
+        return Product.objects.filter(tags__name='для взрослых').order_by('-id')
