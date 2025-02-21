@@ -5,8 +5,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('books.urls')),
-    path('', include('clothes.urls')),
+  #  path('', include('books.urls')),
+   # path('', include('clothes.urls')),
     path('', include('basket.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL,

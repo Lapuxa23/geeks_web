@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books',
     'clothes',
-    'basket'
+    'basket',
 ]
 
 MIDDLEWARE = [
