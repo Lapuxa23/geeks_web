@@ -8,3 +8,6 @@ class BookAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'created_at', 'total_price')
+
+
+

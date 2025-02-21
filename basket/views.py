@@ -6,14 +6,14 @@ from .models import Book, Order, OrderItem
 
 class BookListView(LoginRequiredMixin, ListView):
     model = Book
-    template_name = 'book_list.html'
+    template_name = 'books_list.html'
     context_object_name = 'books'
 
 class AddToCartView(LoginRequiredMixin, RedirectView):
-    pattern_name = 'book_list'
+    pattern_name = 'books_list'
 
     def get_redirect_url(self, *args, **kwargs):
-        book = get_object_or_404(Book, id=kwargs['book_id'])
+        book = get_object_or_404(Book, id=kwargs['books_id'])
         order, created = Order.objects.get_or_create(user=self.request.user, status='Pending')
         order_item, created = OrderItem.objects.get_or_create(order=order, book=book, defaults={'price': book.price})
 
