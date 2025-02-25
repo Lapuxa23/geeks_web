@@ -9,6 +9,7 @@ urlpatterns = [
     path('', include('clothes.urls')),
     path('', include('basket.urls')),
     path('',include('anilibria_schedule.urls')),
+    path('', include('users.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL,
                      document_root=settings.STATIC_ROOT)
